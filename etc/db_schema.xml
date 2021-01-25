@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="menu" resource="default" engine="innodb" comment="Web4 MenuCMS">
+        <column xsi:type="int" name="menu_id" padding="6" unsigned="true" nullable="false" identity="true"
+                comment="Menu ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="25" comment="Name"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="25" comment="Status"/>
+        <column xsi:type="timestamp" name="created" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="menu_id"/>
+        </constraint>
+    </table>
+    <table name="menupage" resource="default" engine="innodb" comment="CMS Page To Store Linkage Table">
+        <column xsi:type="int" name="menu_id" unsigned="true" nullable="false" identity="false"/>
+                comment="menu id"/>
+        <column xsi:type="smallint" name="page_id" unsigned="false" nullable="false" identity="false"
+                comment="Page ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="menu_id"/>
+            <column name="page_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MENUPAGE_MENU_ID_MENU_MENU_ID" table="menupage"
+                    column="menu_id" referenceTable="menu" referenceColumn="menu_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MENUPAGE_PAGE_ID_CMS_PAGE_PAGE_ID" table="menupage"
+                    column="page_id" referenceTable="cms_page" referenceColumn="page_id" onDelete="CASCADE"/>
+    </table>
+</schema>

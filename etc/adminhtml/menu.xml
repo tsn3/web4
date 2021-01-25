@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Web4_MenuCMS::menucms" title="Menu CMS" module="Web4_MenuCMS" sortOrder="51" resource="Web4_MenuCms::menucms"/>
+        <add id="Web4_MenuCMS::menu_add_link" title="ADD Link" module="Web4_MenuCMS" sortOrder="99" parent="Web4_MenuCMS::menucms" action="menucms/menu/index" resource="Web4_MenuCMS::menu_add_link"/>
+    </menu>
+</config>
