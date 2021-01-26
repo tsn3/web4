@@ -5,77 +5,99 @@
             <item name="provider" xsi:type="string">menu_form.menu_form_data_source</item>
             <item name="deps" xsi:type="string">menu_form.menu_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Menu Information</item>
-        <item name="config" xsi:type="array">
-            <item name="dataScope" xsi:type="string">data</item>
-            <item name="namespace" xsi:type="string">menu_form</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
         </item>
-        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save link</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">menucms/menu/save</item>
+            </item>
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">menucms/menu/index</item>
+            </item>
+        </item>
     </argument>
     <dataSource name="menu_form_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Web4\MenuCMS\Model\DataProvider</argument>
-            <argument name="name" xsi:type="string">menu_form_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
-        </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
+        <settings>
+            <submitUrl path="web4_MenuCMS/menu/save"/>
+        </settings>
+        <dataProvider class="Web4\MenuCMS\Model\DataProvider" name="menu_form_data_source">
+            <settings>
+                <requestFieldName>menu_id</requestFieldName>
+                <primaryFieldName>menu_id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
-    <fieldset name="menu_add ">
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="collapsible" xsi:type="boolean">true</item>
-                <item name="label" xsi:type="string" translate="true">Menu Add</item>
-                <item name="sortOrder" xsi:type="number">20</item>
-            </item>
-        </argument>
-        <field name="menu_id">
+    <fieldset name="menu_form">
+
+        <settings>
+            <label translate="true">Menu</label>
+            <collapsible>false</collapsible>
+        </settings>
+        <field name="menu_id" formElement="hidden">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Menu Id</item>
-                    <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">menu</item>
-                    <item name="dataScope" xsi:type="string">menu_id</item>
+                    <item name="label" xsi:type="string" translate="true">Menu ID</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>text</dataType>
+            </settings>
         </field>
-        <field name="name">
+        <field name="name" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="source" xsi:type="string">menu</item>
                     <item name="label" xsi:type="string" translate="true">Name</item>
-                    <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">menu</item>
-                    <item name="dataScope" xsi:type="string">name</item>
                 </item>
             </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+            </settings>
         </field>
-        <field name="url_key">
+        <field name="url_key" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">URL key</item>
-                    <item name="formElement" xsi:type="string">input</item>
                     <item name="source" xsi:type="string">menu</item>
-                    <item name="dataScope" xsi:type="string">url_key</item>
+                    <item name="label" xsi:type="string" translate="true">url key</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>text</dataType>
+            </settings>
         </field>
-        <field name="status">
+        <field name="status" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">select</item>
-                    <item name="label" xsi:type="string" translate="true">Status</item>
-                    <item name="formElement" xsi:type="string">textarea</item>
                     <item name="source" xsi:type="string">menu</item>
-                    <item name="dataScope" xsi:type="string">Status</item>
+                    <item name="label" xsi:type="string" translate="true">status</item>
                 </item>
             </argument>
+            <settings>
+                <dataType>number</dataType>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                    </settings>
+                </select>
+            </formElements>
         </field>
     </fieldset>
 </form>
