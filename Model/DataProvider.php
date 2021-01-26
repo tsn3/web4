@@ -9,9 +9,9 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     /**
      * DataProvider constructor.
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param \Magento\Framework\Registry $coreRegistry
      * @param array $meta
      * @param array $data
@@ -25,10 +25,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         array $data = []
     )
     {
-
         $this->_coreRegistry = $coreRegistry;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-
     }
 
     public function addFilter(\Magento\Framework\Api\Filter $filter)
