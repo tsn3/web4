@@ -14,11 +14,11 @@ class Save extends \Magento\Backend\App\Action
     {
         $data = $this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
-//        if(isset($data['menu_form'])){
-//            $data = $data['menu_form'];
-//        }else{
-//            $data = false;
-//        }
+        if(isset($data['menu_form'])){
+            $data = $data['menu_form'];
+        }else{
+            $data = false;
+        }
         if ($data) {
             $model = $this->_objectManager->create(\Web4\MenuCMS\Model\Menu::class);
             $id = $this->getRequest()->getParam('menu_id');
@@ -27,10 +27,12 @@ class Save extends \Magento\Backend\App\Action
                 $this->messageManager->addErrorMessage(__('This menu no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
-
+            if (isset($data['menu_id'])&&(!$data['menu_id'])){
+                unset($data['menu_id']);
+            }
             $model->setData($data);
             try {
-//                var_dump($model->getData());die();
+
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the menu.'));
 //                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);

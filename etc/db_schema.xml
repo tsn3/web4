@@ -6,7 +6,7 @@
                 comment="Menu ID"/>
         <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
         <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
-        <column xsi:type="varchar" name="status" nullable="false" length="25" comment="Status"/>
+        <column xsi:type="smallint" name="status" nullable="false" comment="Status"/>
         <column xsi:type="timestamp" name="created" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created"/>
 
