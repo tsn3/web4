@@ -30,7 +30,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="web4_MenuCMS/menu/save"/>
+            <submitUrl path="menucms/menu/save"/>
         </settings>
         <dataProvider class="Web4\MenuCMS\Model\DataProvider" name="menu_form_data_source">
             <settings>
