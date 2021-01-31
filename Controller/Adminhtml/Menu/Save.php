@@ -15,6 +15,7 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
         $resultRedirect = $this->resultRedirectFactory->create();
         if(isset($data['menu_form'])){
+            $this->logger->debug('DATA',$data);
             $data = $data['menu_form'];
         }else{
             $data = false;
@@ -24,7 +25,6 @@ class Save extends \Magento\Backend\App\Action
             $id = $this->getRequest()->getParam('menu_id');
 
             if ($id) {
-                $this->messageManager->addErrorMessage(__('This menu no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
             if (isset($data['menu_id'])&&(!$data['menu_id'])){
