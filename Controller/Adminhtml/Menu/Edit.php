@@ -19,7 +19,7 @@ class Edit extends \Magento\Backend\App\Action
 
     public function execute()
     {
-        $id = $this->getRequest()->getParam('menu_id');
+        $id = $this->getRequest()->getParam('id');
         $model = $this->_objectManager->create(\Web4\MenuCMS\Model\Menu::class);
 
         if ($id) {
@@ -30,7 +30,7 @@ class Edit extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/');
             }
         }
-//        $this->_coreRegistry->register('menu', $model);
+        $this->_coreRegistry->register('menu', $model);
 //        $resultPage = $this->_initAction();
 
         $resultPage = $this->resultPageFactory->create();
