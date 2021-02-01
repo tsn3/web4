@@ -3,12 +3,12 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">menu_form.menu_form_data_source</item>
-            <item name="deps" xsi:type="string">menu_form.menu_form_data_source</item>
         </item>
-        <item name="layout" xsi:type="array">
-            <item name="type" xsi:type="string">tabs</item>
-        </item>
-        <item name="buttons" xsi:type="array">
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons xsi:type="array">
             <item name="save" xsi:type="array">
                 <item name="name" xsi:type="string">save</item>
                 <item name="label" xsi:type="string" translate="true">Save link</item>
@@ -21,8 +21,13 @@
                 <item name="class" xsi:type="string">back</item>
                 <item name="url" xsi:type="string">menucms/menu/index</item>
             </item>
-        </item>
-    </argument>
+        </buttons>
+        <namespace>menu_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>menu_form.menu_form_data_source</dep>
+        </deps>
+    </settings>
     <dataSource name="menu_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
@@ -40,7 +45,6 @@
         </dataProvider>
     </dataSource>
     <fieldset name="menu_form">
-
         <settings>
             <label translate="true">Menu</label>
             <collapsible>false</collapsible>

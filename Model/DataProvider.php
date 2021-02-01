@@ -6,6 +6,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
      * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry;
+    protected $logger;
+    protected $_loadedData;
 
     /**
      * DataProvider constructor.
@@ -21,11 +23,13 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         $primaryFieldName,
         $requestFieldName,
         \Magento\Framework\Registry $coreRegistry,
+        \Psr\Log\LoggerInterface $logger,
         array $meta = [],
         array $data = []
     )
     {
         $this->_coreRegistry = $coreRegistry;
+        $this->logger = $logger;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -36,11 +40,16 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     public function getData()
     {
+
         $model = $this->_coreRegistry->registry('menu');
         if ($model != null) {
             $this->loadedData[$model->getId()] = $model->getData();
             return $this->loadedData;
+
         }
+        $this->loadedData[$model->getId()] = $model->getData();
         return [];
+
     }
+
 }

@@ -45,7 +45,7 @@ class Save extends \Magento\Backend\App\Action
             } catch (\Exception $e) {
                 $this->logger->error($e->getMessage());
                 $this->messageManager->addErrorMessage(__('Something went wrong while saving the page.' ));
-//                $this->logger->addDebug;
+
             }
             return $resultRedirect->setPath('*/*/edit', ['menu_id' => $this->getRequest()->getParam('menu_id')]);
         }

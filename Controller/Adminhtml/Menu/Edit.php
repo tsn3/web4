@@ -3,17 +3,20 @@ namespace Web4\MenuCMS\Controller\Adminhtml\Menu;
 use Magento\Backend\App\Action;
 class Edit extends \Magento\Backend\App\Action
 {
+    protected $logger;
     protected $_coreRegistry;
     protected $resultPageFactory;
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Psr\Log\LoggerInterface $logger
     )
     {
         $this->resultPageFactory = $resultPageFactory;
         $this->_coreRegistry = $coreRegistry;
+        $this->logger = $logger;
         parent::__construct($context);
     }
 
@@ -30,6 +33,8 @@ class Edit extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/');
             }
         }
+//        $this->logger->info(var_export($model->getData(), true));
+
         $this->_coreRegistry->register('menu', $model);
 //        $resultPage = $this->_initAction();
 
