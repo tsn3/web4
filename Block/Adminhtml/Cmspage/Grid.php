@@ -1,6 +1,6 @@
 <?php
 namespace Web4\MenuCMS\Block\Adminhtml\Cmspage;
-
+use Magento\Framework\Registry;
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
 
@@ -8,33 +8,25 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      * @var \Magento\Cms\Model\PageFactory
      */
     protected $_pageFactory;
+    protected $registry;
 
-    /**
-     * @var \Magento\Framework\Module\Manager
-     *
-     */
-    protected $moduleManager;
 
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Backend\Helper\Data $backendHelper
      * @param \Magento\Cms\Model\PageFactory $pageFactory
-
-     * @param \Magento\Framework\Module\Manager $moduleManager
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Magento\Cms\Model\PageFactory $pageFactory,
-
-        \Magento\Framework\Module\Manager $moduleManager,
+        \Magento\Framework\Registry $registry,
         array $data = []
     )
     {
+        $this->registry = $registry;
         $this->_pageFactory = $pageFactory;
-
-        $this->moduleManager = $moduleManager;
         parent::__construct($context, $backendHelper, $data);
     }
 
@@ -68,6 +60,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     protected function _prepareColumns()
     {
+        $this->addColumn(
+            'in_category',
+            [
+                'type' => 'checkbox',
+                'name' => 'in_category',
+//                'values' => $this->_getSelected(), must realizaited in GRID.php
+                'index' => 'page_id',
+                'header_css_class' => 'col-select col-massaction',
+                'column_css_class' => 'col-select col-massaction'
+            ]
+        );
 
         $this->addColumn(
             'page_id',
@@ -87,49 +90,16 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'index' => 'title',
             ]
         );
+
+
+
+//        $block = $this->getLayout()->getBlock('grid.bottom.links');
 //
-//        $this->addColumn(
-//            'is_active',
-//            [
-//                'header' => __('Status'),
-//                'index' => 'is_active',
-//                'type' => 'options',
-//                'options' => $this->_is_active->getOptionArray(),
-//            ]
-//        );
-
-
-//        $this->addColumn(
-//            'edit',
-//            [
-//                'header' => __('Edit'),
-//                'type' => 'action',
-//                'getter' => 'getId',
-//                'actions' => [
-//                    [
-//                        'caption' => __('Edit'),
-//                        'url' => [
-//                            'base' => 'menu/*/edit',
-//                        ],
-//                        'field' => 'id',
-//                    ],
-//                ],
-//                'filter' => false,
-//                'sortable' => false,
-//                'index' => 'stores',
-//                'header_css_class' => 'col-action',
-//                'column_css_class' => 'col-action',
-//            ]
-//        );
-
-
-        $block = $this->getLayout()->getBlock('grid.bottom.links');
-
-        if ($block) {
-            $this->setChild('grid.bottom.links', $block);
-        }
-
-        return parent::_prepareColumns();
+//        if ($block) {
+//            $this->setChild('grid.bottom.links', $block);
+//        }
+//
+//        return parent::_prepareColumns();
     }
 
     /**
@@ -178,14 +148,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
      */
     public function getGridUrl()
     {
-        return $this->getUrl('menu/*/grid', ['_current' => true]);
+        return $this->getUrl('*/*/grid', ['_current' => true]);
     }
 
-    /**
-     * @return string
-     */
-    public function getRowUrl($row)
-    {
-        return $this->getUrl('menu/*/edit', ['id' => $row->getId()]);
-    }
 }

@@ -39,10 +39,7 @@ class Edit extends \Magento\Backend\App\Action
 //        $resultPage = $this->_initAction();
 
         $resultPage = $this->resultPageFactory->create();
-//        $this->initPage($resultPage)->addBreadcrumb(
-//            $id ? __('Edit Menu') : __('New Menu'),
-//            $id ? __('Edit Menu') : __('New Menu')
-//        );
+
         $resultPage->getConfig()->getTitle()->prepend(__('Menu'));
         $resultPage->getConfig()->getTitle()->prepend($model->getId() ? __('Edit Menu %1', $model->getId()) : __('New Menu'));
         return $resultPage;
