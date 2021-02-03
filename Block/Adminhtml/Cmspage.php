@@ -7,7 +7,6 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
     protected function _construct(
     )
     {
-        $this->serializer = $serializer;
         $this->_blockGroup = 'Web4_MenuCMS';
         $this->_controller = 'adminhtml_cmspage';
         $this->_headerText = __('CMS pages');

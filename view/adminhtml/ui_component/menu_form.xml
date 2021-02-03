@@ -4,7 +4,7 @@
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">menu_form.menu_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="label" xsi:type="string" translate="true">Page Information</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
@@ -114,7 +114,7 @@
         </settings>
         <container name="assign_products_container" sortOrder="160">
             <htmlContent name="html_content">
-                <block name="gallery" class="Web4\MenuCMS\Block\Adminhtml\Cmspage\Grid"/>
+                <block name="gallery" class="Web4\MenuCMS\Block\Adminhtml\Cmspage"/>
             </htmlContent>
         </container>
     </fieldset>
