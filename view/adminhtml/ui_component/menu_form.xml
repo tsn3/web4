@@ -107,14 +107,14 @@
     <fieldset name="assign_products" sortOrder="40">
         <settings>
             <collapsible>true</collapsible>
-            <label translate="true">Links</label>
+            <label translate="true">Select page/(s)</label>
             <additionalClasses>
                 <class name="product-video-grid">true</class>
             </additionalClasses>
         </settings>
         <container name="assign_products_container" sortOrder="160">
             <htmlContent name="html_content">
-                <block name="gallery" class="Web4\MenuCMS\Block\Adminhtml\CMSpage\CMSpage"/>
+                <block name="gallery" class="Web4\MenuCMS\Block\Adminhtml\Cmspage\Grid"/>
             </htmlContent>
         </container>
     </fieldset>

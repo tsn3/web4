@@ -86,16 +86,16 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'index' => 'title',
             ]
         );
-
-        $this->addColumn(
-            'is_active',
-            [
-                'header' => __('Status'),
-                'index' => 'is_active',
-                'type' => 'options',
-                'options' => $this->_status->getOptionArray(),
-            ]
-        );
+//
+//        $this->addColumn(
+//            'is_active',
+//            [
+//                'header' => __('Status'),
+//                'index' => 'is_active',
+//                'type' => 'options',
+//                'options' => $this->_is_active->getOptionArray(),
+//            ]
+//        );
 
 
         $this->addColumn(

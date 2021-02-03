@@ -5,7 +5,6 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
 {
     protected $serializer;
     protected function _construct(
-        SerializerInterface $serializer
     )
     {
         $this->serializer = $serializer;
@@ -17,19 +16,48 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
 
         parent::_construct();
     }
-    protected function _prepareLayout()
+//    protected function _prepareLayout()
+//    {
+//        $grid = $this->getGridBlock();
+//        if (is_string($grid)) {
+//            $grid = $this->getLayout()->getBlock($grid);
+//        }
+//        if ($grid instanceof \Magento\Backend\Block\Widget\Grid) {
+//            $this->setGridBlock($grid)->setSerializeData($grid->{$this->getCallback()}());
+//        }
+//        return parent::_prepareLayout();
+//    }
+    public function _prepareLayout()
     {
-        $grid = $this->getGridBlock();
-        if (is_string($grid)) {
-            $grid = $this->getLayout()->getBlock($grid);
-        }
-        if ($grid instanceof \Magento\Backend\Block\Widget\Grid) {
-            $this->setGridBlock($grid)->setSerializeData($grid->{$this->getCallback()}());
-        }
-        return parent::_prepareLayout();
+       $selected = $this->getRequest()->getParam('selected', '');
+       $productTypeId = $this->getRequest()->getParam('product_type_id', '');
+       $chooser = $this->_view->getLayout()->createBlock(
+            \Magento\Catalog\Block\Adminhtml\Product\Widget\Chooser::class
+        )->setName(
+            $this->mathRandom->getUniqueHash('products_grid_')
+        )->setUseMassaction(
+            true
+        )->setProductTypeId(
+            $productTypeId
+        )->setSelectedProducts(
+            explode(',', $selected)
+       );
+        /* @var $serializer \Magento\Backend\Block\Widget\Grid\Serializer */
+        $serializer = $this->_view->getLayout()->createBlock(
+            \Magento\Backend\Block\Widget\Grid\Serializer::class,
+            '',
+            [
+                'data' => [
+                    'grid_block' => $chooser,
+                    'callback' => 'getSelectedProducts',
+                    'input_element_name' => 'selected_pages',
+                    'reload_param_name' => 'selected_pages',
+                ]
+            ]
+        );
+        $this->setBody($chooser->toHtml() . $serializer->toHtml());
     }
 
-    }
     public function getGridHtml()
     {
         return $this->getChildHtml('grid');
