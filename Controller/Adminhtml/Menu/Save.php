@@ -28,13 +28,17 @@ class Save extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/');
             }
             if (isset($data['menu_id'])&&(!$data['menu_id'])){
+
                 unset($data['menu_id']);
+
             }
             $model->setData($data);
             try {
 
+
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the menu.'));
+
 //                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
 
                 if ($this->getRequest()->getParam('back')) {
