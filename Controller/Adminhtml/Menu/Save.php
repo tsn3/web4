@@ -20,14 +20,12 @@ class Save extends \Magento\Backend\App\Action
         }else{
             $data = false;
         }
-//        var_dump($_POST);
-//        var_dump($data);die();
+
         if ($data) {
             $model = $this->_objectManager->create(\Web4\MenuCMS\Model\Menu::class);
             $id = $this->getRequest()->getParam('menu_id');
 
 //            if ($id) {
-//                $this->logger->info('Error for save', $id);
 //                $this->messageManager->addErrorMessage(__('This menu no longer exists.'));
 //                return $resultRedirect->setPath('*/*/');
 //            }

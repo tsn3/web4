@@ -33,7 +33,6 @@ class Edit extends \Magento\Backend\App\Action
                 return $resultRedirect->setPath('*/*/');
             }
         }
-//        $this->logger->info(var_export($model->getData(), true));
 
         $this->_coreRegistry->register('menu', $model);
 //        $resultPage = $this->_initAction();

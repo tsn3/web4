@@ -40,7 +40,6 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 
     public function getData()
     {
-
         $model = $this->_coreRegistry->registry('menu');
         if ($model != null) {
             $this->loadedData[$model->getId()] = $model->getData();
@@ -49,7 +48,6 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         }
         $this->loadedData[$model->getId()] = $model->getData();
         return [];
-
     }
 
 }

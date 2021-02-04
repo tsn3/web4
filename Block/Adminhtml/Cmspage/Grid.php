@@ -3,7 +3,6 @@ namespace Web4\MenuCMS\Block\Adminhtml\Cmspage;
 use Magento\Framework\Registry;
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
-
     /**
      * @var \Magento\Cms\Model\PageFactory
      */
@@ -30,9 +29,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         parent::__construct($context, $backendHelper, $data);
     }
 
-    /**
-     * @return void
-     */
     protected function _construct()
     {
         parent::_construct();
@@ -44,9 +40,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->setVarNameFilter('grid_record');
     }
 
-    /**
-     * @return $this
-     */
     protected function _prepareCollection()
     {
         $collection = $this->_pageFactory->create()->getCollection();
@@ -55,9 +48,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         return $this;
     }
 
-    /**
-     * @return $this
-     */
     protected function _prepareColumns()
     {
         $this->addColumn(
@@ -67,8 +57,8 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'name' => 'in_category',
 //                'values' => $this->_getSelected(), must realizaited in GRID.php
                 'index' => 'page_id',
-                'header_css_class' => 'col-select col-massaction',
-                'column_css_class' => 'col-select col-massaction'
+//                'header_css_class' => 'col-select col-massaction',
+//                'column_css_class' => 'col-select col-massaction'
             ]
         );
 
@@ -78,8 +68,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'header' => __('ID'),
                 'type' => 'number',
                 'index' => 'page_id',
-//                'header_css_class' => 'col-id',
-//                'column_css_class' => 'col-id',
             ]
         );
 
