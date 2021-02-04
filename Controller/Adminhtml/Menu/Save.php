@@ -13,13 +13,10 @@ class Save extends \Magento\Backend\App\Action
     public function execute()
     {
         $data = $this->getRequest()->getPost();
-        echo get_class($this->getRequest());
-        $resultRedirect = $this->resultRedirectFactory->create();
-        if(isset($data['menu_form'])){
-            $data = $data['menu_form'];
-        }else{
-            $data = false;
+        if(is_object($data)){
+            $data = $data->toArray();
         }
+        $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {
             $model = $this->_objectManager->create(\Web4\MenuCMS\Model\Menu::class);
