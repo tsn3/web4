@@ -114,7 +114,7 @@
         </settings>
         <container name="assign_products_container" sortOrder="160">
             <htmlContent name="html_content">
-                <block name="gallery" class="Web4\MenuCMS\Block\Adminhtml\Cmspage"/>
+                <block name="grid" class="Web4\MenuCMS\Block\Adminhtml\Cmspage"/>
             </htmlContent>
         </container>
     </fieldset>
