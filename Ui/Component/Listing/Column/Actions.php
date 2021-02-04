@@ -1,19 +1,15 @@
 <?php
 namespace Web4\MenuCMS\Ui\Component\Listing\Column;
-
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
-
-
 class Actions extends Column
 {
-
     const URL_PATH_EDIT = 'menucms/menu/edit';
+    const URL_PATH_DELETE = 'menucms/menu/delete';
 
     protected $urlBuilder;
-
 
     public function __construct(
         ContextInterface $context,
@@ -42,11 +38,22 @@ class Actions extends Column
                             ),
                             'label' => __('Edit')
                         ],
+                        'delete' => [
+                            'href' => $this->urlBuilder->getUrl(
+                                static::URL_PATH_DELETE,
+                                [
+                                    'id' => $item['menu_id']
+                                ]
+                            ),
+                            'label' => __('Delete'),
+                            'confirm' => [
+                                'title' => __('Delete this link??')
+                            ]
+                        ]
                     ];
                 }
             }
         }
-
         return $dataSource;
     }
 }

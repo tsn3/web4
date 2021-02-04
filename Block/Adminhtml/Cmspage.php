@@ -10,9 +10,8 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
         $this->_blockGroup = 'Web4_MenuCMS';
         $this->_controller = 'adminhtml_cmspage';
         $this->_headerText = __('CMS pages');
-        $this->_addButtonLabel = __('Add New Link');
-
         parent::_construct();
+        $this->removeButton('add');
     }
 
     public function _prepareLayout()
