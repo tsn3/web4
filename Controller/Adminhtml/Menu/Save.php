@@ -16,7 +16,7 @@ class Save extends \Magento\Backend\App\Action
         if(is_object($data)){
             $data = $data->toArray();
         }
-        var_dump($data);die();
+//        var_dump($data);die();
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {

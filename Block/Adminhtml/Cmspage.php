@@ -35,6 +35,10 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
 
     public function getGridHtml()
     {
-        return parent::getGridHtml().$this->getChildHtml('serializer');
+        $script = '<script type="text/javascript">
+            require(["Web4_MenuCMS/js/cmspage"],function(){});
+        </script>';
+        return parent::getGridHtml().$this->getChildHtml('serializer').$script;
     }
+
 }
