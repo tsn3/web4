@@ -16,16 +16,13 @@ class Save extends \Magento\Backend\App\Action
         if(is_object($data)){
             $data = $data->toArray();
         }
+        var_dump($data);die();
         $resultRedirect = $this->resultRedirectFactory->create();
 
         if ($data) {
             $model = $this->_objectManager->create(\Web4\MenuCMS\Model\Menu::class);
             $id = $this->getRequest()->getParam('menu_id');
 
-//            if ($id) {
-//                $this->messageManager->addErrorMessage(__('This menu no longer exists.'));
-//                return $resultRedirect->setPath('*/*/');
-//            }
             if (isset($data['menu_id'])&&(!$data['menu_id'])){
                 unset($data['menu_id']);
             }

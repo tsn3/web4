@@ -79,57 +79,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             ]
         );
 
-
-
-//        $block = $this->getLayout()->getBlock('grid.bottom.links');
-//
-//        if ($block) {
-//            $this->setChild('grid.bottom.links', $block);
-//        }
-//
-//        return parent::_prepareColumns();
     }
 
-    /**
-     * @return $this
-     */
-//    protected function _prepareMassaction()
-//    {
-//        $this->setMassactionIdField('id');
-//        $this->getMassactionBlock()->setFormFieldName('id');
-//
-//        $this->getMassactionBlock()->addItem(
-//            'delete',
-//            [
-//                'label' => __('Delete'),
-//                'url' => $this->getUrl('menu/*/massDelete'),
-//                'confirm' => __('Are you sure?'),
-//            ]
-//        );
-//
-//        $statuses = $this->_status->toOptionArray();
-//
-//        array_unshift($statuses, ['label' => '', 'value' => '']);
-//
-//        $this->getMassactionBlock()->addItem(
-//            'status',
-//            [
-//                'label' => __('Change status'),
-//                'url' => $this->getUrl('menu/*/massStatus', ['_current' => true]),
-//                'additional' => [
-//                    'visibility' => [
-//                        'name' => 'status',
-//                        'type' => 'select',
-//                        'class' => 'required-entry',
-//                        'label' => __('Status'),
-//                        'values' => $statuses,
-//                    ],
-//                ],
-//            ]
-//        );
-//
-//        return $this;
-//    }
+
 
     /**
      * @return string
