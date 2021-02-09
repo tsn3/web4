@@ -1,7 +1,7 @@
 <?php
 namespace Web4\MenuCMS\Model\ResourceModel;
-
-
+use \Magento\Backend\App\Action;
+use Magento\Framework\DataObject;
 class Menu extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
     protected function _construct()
@@ -9,21 +9,41 @@ class Menu extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('menu', 'menu_id');
     }
 
-    protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
+    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
     {
-        $id = $this->getIdFieldName('id');
+        $table = $this->getTable('menupage');
+        $newPages = (array)$object->getPages();
 
-        $select->joinLeft(
-            array('cms_page'=>$this->getTable('cms_page')),
-            'menu_id.menu=page_id.cms_page',
-            array('*');
+        $connection = $this->getConnection();
+        $where = ['menu_id = ?' => (int)$object->getId()];
+        $connection->delete($table, $where);
 
-        return parent::_afterLoad();
-    }
-
-    public function afterSave(\Magento\Framework\DataObject $object)
-    {
-        $this->_afterSave($object);
+        if ($newPages) {
+            $data = [];
+            foreach ($newPages as $pages) {
+                $data[] = (['menu_id' => (int)$object->getId(), 'page_id' => $pages]);
+            }
+            $this->getConnection()->insertMultiple($table, $data);
+        }
+        return parent::_afterSave($object);
     }
 
 }
+
+
+//
+///**
+// * Perform operations after object load
+// *
+// * @param \Magento\Framework\Model\AbstractModel $object
+// * @return $this
+// */
+//protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
+//{
+//    if ($object->getId()) {
+//        $stores = $this->lookupStoreIds($object->getId());
+//        $object->setData('store_id', $stores);
+//    }
+//
+//    return parent::_afterLoad($object);
+//}

@@ -16,7 +16,7 @@
     </table>
     <table name="menupage" resource="default" engine="innodb" comment="CMS Page To Store Linkage Table">
         <column xsi:type="int" name="menu_id" unsigned="true" nullable="false" identity="false"/>
-                comment="menu id"/>
+        comment="menu id"/>
         <column xsi:type="smallint" name="page_id" unsigned="false" nullable="false" identity="false"
                 comment="Page ID"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
