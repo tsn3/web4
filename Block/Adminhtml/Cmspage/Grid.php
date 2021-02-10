@@ -20,11 +20,13 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Magento\Cms\Model\PageFactory $pageFactory,
-        \Magento\Framework\Registry $registry,
+//        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Registry $coreRegistry,
         array $data = []
     )
     {
-        $this->registry = $registry;
+//        $this->registry = $registry;
+        $this->_coreRegistry = $coreRegistry;
         $this->_pageFactory = $pageFactory;
         parent::__construct($context, $backendHelper, $data);
     }
@@ -51,11 +53,11 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _prepareColumns()
     {
         $this->addColumn(
-            'in_category',
+            'in_pages',
             [
                 'type' => 'checkbox',
-                'name' => 'in_category',
-//                'values' => $this->_getSelected(), must realizaited in GRID.php
+                'name' => 'in_pages',
+                'values' => $this->_getSelectedPages(),
                 'index' => 'page_id',
 //                'header_css_class' => 'col-select col-massaction',
 //                'column_css_class' => 'col-select col-massaction'
@@ -80,20 +82,34 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
     }
-    protected function _getSelected()
+
+    protected function _getSelectedPages()
     {
-        $collection = $this->_getAttributeCollection();
-        $selected = [];
-
-        foreach ($collection as $item) {
-            $matchingFieldRow = $this->productFieldModel->getRecord($item->getData('entity_attribute_id'));
-            if ($matchingFieldRow->getData('include_in_translation') == 1) {
-                array_push($selected, $item->getId());
-            }
-        }
-
-        return implode(',', $selected);
+//         $this->getPages();
+        $pages =$this->_coreRegistry->registry('menu')->getPages();
+//        if (!is_array($pages)) {
+//            $pages = array_keys($this->getSelectedRelatedPages());
+//        }
+        return $pages;
     }
+
+    /**
+     * Retrieve related pages
+     *
+     * @return array
+     */
+//    public function getSelectedRelatedPages()
+//    {
+//        $pages = [];
+//        if ($this->_coreRegistry->registry('menu')->getRelatedProducts()) {
+//            foreach ($this->_coreRegistry->registry('menu')->getRelatedProducts() as $page) {
+//                $pages[$page->getId()] = ['position' => $page->getPosition()];
+//            }
+//        }
+//        return $pages;
+//    }
+
+
     /**
      * @return string
      */
@@ -101,5 +117,4 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         return $this->getUrl('*/*/grid', ['_current' => true]);
     }
-
 }

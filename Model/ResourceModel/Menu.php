@@ -35,10 +35,6 @@ class Menu extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
             ->where('menu_id = ?', $object->getId());
 
         if ($dataPages = $this->getConnection()->fetchCol($select)) {
-            /*$pagesArray = array();
-            foreach ($dataPages as $pages) {
-                $pagesArray[] = $pages['page_id'];
-            }*/
             $object->setPages($dataPages);
         }
         return parent::_afterLoad($object);
