@@ -80,9 +80,20 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
 
     }
+    protected function _getSelected()
+    {
+        $collection = $this->_getAttributeCollection();
+        $selected = [];
 
+        foreach ($collection as $item) {
+            $matchingFieldRow = $this->productFieldModel->getRecord($item->getData('entity_attribute_id'));
+            if ($matchingFieldRow->getData('include_in_translation') == 1) {
+                array_push($selected, $item->getId());
+            }
+        }
 
-
+        return implode(',', $selected);
+    }
     /**
      * @return string
      */

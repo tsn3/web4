@@ -30,59 +30,17 @@ class Menu extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 
     protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
     {
-        if ($object->getId()) {
-            $pages = $this->lookupStoreIds($object->getId());
-            $object->setData('page_id', $pages);
-        }
+        $select = $this->getConnection()->select()
+            ->from($this->getTable('menupage'),'page_id')
+            ->where('menu_id = ?', $object->getId());
 
+        if ($dataPages = $this->getConnection()->fetchCol($select)) {
+            /*$pagesArray = array();
+            foreach ($dataPages as $pages) {
+                $pagesArray[] = $pages['page_id'];
+            }*/
+            $object->setPages($dataPages);
+        }
         return parent::_afterLoad($object);
     }
-
-    public function lookupPagesIds($categoryId)
-    {
-        $adapter = $this->getConnection();
-
-        $select = $adapter->select()->from(
-            $this->getTable('menupage'),
-            'page_id'
-        )->where(
-            'category_id = ?',
-            (int)$categoryId
-        );
-
-        return $adapter->fetchCol($select);
-    }
-
-
-
-    $connection = $this->getConnection();
-
-    $select = $connection->select()->from(
-    $this->getTable('menupage'),
-    'store_id'
-    )->where(
-    'post_id = ?',
-    (int)$postId
-    );
-
-    return $connection->fetchCol($select);
-
 }
-
-
-//
-///**
-// * Perform operations after object load
-// *
-// * @param \Magento\Framework\Model\AbstractModel $object
-// * @return $this
-// */
-//protected function _afterLoad(\Magento\Framework\Model\AbstractModel $object)
-//{
-//    if ($object->getId()) {
-//        $stores = $this->lookupStoreIds($object->getId());
-//        $object->setData('store_id', $stores);
-//    }
-//
-//    return parent::_afterLoad($object);
-//}
