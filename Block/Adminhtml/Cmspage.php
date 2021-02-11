@@ -24,7 +24,7 @@ class Cmspage extends \Magento\Backend\Block\Widget\Grid\Container
             [
                 'data' => [
                     'grid_block' => $this->getChildBlock('grid'),
-                    'callback' => 'getSelectedProducts',
+                    'callback' => 'getSelectedPages',
                     'input_element_name' => 'selected_pages',
                     'reload_param_name' => 'selected_pages',
                 ]

@@ -21,8 +21,9 @@ class Menu extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         if ($newPages) {
             $data = [];
             foreach ($newPages as $pages) {
-                $data[] = (['menu_id' => (int)$object->getId(), 'page_id' => $pages]);
+                $data[] = ['menu_id' => (int)$object->getId(), 'page_id' => $pages];
             }
+
             $this->getConnection()->insertMultiple($table, $data);
         }
         return parent::_afterSave($object);

@@ -57,7 +57,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             [
                 'type' => 'checkbox',
                 'name' => 'in_pages',
-                'values' => $this->_getSelectedPages(),
+                'values' => $this->getSelectedPages(),
                 'index' => 'page_id',
 //                'header_css_class' => 'col-select col-massaction',
 //                'column_css_class' => 'col-select col-massaction'
@@ -83,31 +83,15 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
     }
 
-    protected function _getSelectedPages()
+    public function getSelectedPages()
     {
-//         $this->getPages();
+
         $pages =$this->_coreRegistry->registry('menu')->getPages();
-//        if (!is_array($pages)) {
-//            $pages = array_keys($this->getSelectedRelatedPages());
-//        }
+
         return $pages;
     }
 
-    /**
-     * Retrieve related pages
-     *
-     * @return array
-     */
-//    public function getSelectedRelatedPages()
-//    {
-//        $pages = [];
-//        if ($this->_coreRegistry->registry('menu')->getRelatedProducts()) {
-//            foreach ($this->_coreRegistry->registry('menu')->getRelatedProducts() as $page) {
-//                $pages[$page->getId()] = ['position' => $page->getPosition()];
-//            }
-//        }
-//        return $pages;
-//    }
+
 
 
     /**
