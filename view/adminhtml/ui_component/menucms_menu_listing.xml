@@ -31,6 +31,27 @@
             </argument>
         </argument>
     </dataSource>
+    <massaction name="listing_massaction">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="selectProvider" xsi:type="string">menucms_menu_grid.menucms_menu_grid.menucms_columns.ids</item>
+                <item name="indexField" xsi:type="string">menu_id</item>
+            </item>
+        </argument>
+        <action name="delete">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="type" xsi:type="string">delete</item>
+                    <item name="label" xsi:type="string" translate="true">Delete</item>
+                    <item name="url" xsi:type="url" path="*/*/massDelete"/>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">Delete items</item>
+                        <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                    </item>
+                </item>
+            </argument>
+        </action>
+    </massaction>
     <columns name="spinner_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
