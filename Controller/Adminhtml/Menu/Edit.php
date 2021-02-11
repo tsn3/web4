@@ -35,7 +35,7 @@ class Edit extends \Magento\Backend\App\Action
         }
 
         $this->_coreRegistry->register('menu', $model);
-//        $resultPage = $this->_initAction();
+
 
         $resultPage = $this->resultPageFactory->create();
 
