@@ -9,7 +9,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $_pageFactory;
     protected $registry;
 
-
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Backend\Helper\Data $backendHelper
@@ -20,12 +19,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Magento\Cms\Model\PageFactory $pageFactory,
-//        \Magento\Framework\Registry $registry,
         \Magento\Framework\Registry $coreRegistry,
         array $data = []
     )
     {
-//        $this->registry = $registry;
         $this->_coreRegistry = $coreRegistry;
         $this->_pageFactory = $pageFactory;
         parent::__construct($context, $backendHelper, $data);
@@ -59,8 +56,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'name' => 'in_pages',
                 'values' => $this->getSelectedPages(),
                 'index' => 'page_id',
-//                'header_css_class' => 'col-select col-massaction',
-//                'column_css_class' => 'col-select col-massaction'
             ]
         );
 
@@ -90,9 +85,6 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
         return $pages;
     }
-
-
-
 
     /**
      * @return string

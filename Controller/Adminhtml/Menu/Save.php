@@ -15,7 +15,6 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPost();
         if(is_object($data)){
             $data = $data->toArray();
-            $pages = explode('&', ($data['selected_pages']));
         }
         $resultRedirect = $this->resultRedirectFactory->create();
 
@@ -28,7 +27,11 @@ class Save extends \Magento\Backend\App\Action
             }
 
             $model->setData($data);
-            $model->setPages($pages);
+            if (isset($data['selected_pages'])){
+                $pages = explode('&', ($data['selected_pages']));
+                $model->setPages($pages);
+            }
+
             try {
                 $model->save();
                 $this->messageManager->addSuccessMessage(__('You saved the menu.'));

@@ -35,10 +35,7 @@ class Edit extends \Magento\Backend\App\Action
         }
 
         $this->_coreRegistry->register('menu', $model);
-
-
         $resultPage = $this->resultPageFactory->create();
-
         $resultPage->getConfig()->getTitle()->prepend(__('Menu'));
         $resultPage->getConfig()->getTitle()->prepend($model->getId() ? __('Edit Menu %1', $model->getId()) : __('New Menu'));
         return $resultPage;
