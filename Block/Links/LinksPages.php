@@ -1,5 +1,5 @@
 <?php
-namespace Web4\MenuCMS\Block\Adminhtml\Cmspage;
+namespace Web4\MenuCMS\Block\Links;
 use Magento\Framework\View\Element\Template;
 use \Web4\MenuCMS\Model\ResourceModel\Menu\CollectionFactory as LinkCollectionFactory;
 class LinksPages extends Template
@@ -24,7 +24,7 @@ class LinksPages extends Template
         $this->_collection = $this->_linkCollectionFactory->create();
         $this->_collection->join(['selected_pages' =>'menupage'], '(selected_pages.menu_id=main_table.menu_id)and(selected_pages.page_id='.$link.')', 'page_id');
         $this->_collection->addFieldToFilter('status', array('eq' => 1));
-
+        $this->_logger->info($this->_collection->getSelect()->__toString());
         return $this->_collection;
     }
 }
