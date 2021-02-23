@@ -1,0 +1,15 @@
+<?php
+$links = $this->getLinksCollection();
+?>
+<div class="block-linkspages">
+    <ul>
+        <?php foreach ($links as $link):?>
+            <li>
+
+                <a href="<?php echo $this->getUrl($link->getUrlKey());?>">
+                    <?php echo $link->getName()?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
